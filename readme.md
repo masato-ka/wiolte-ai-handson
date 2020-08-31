@@ -18,20 +18,43 @@
 
 ### **ハンズオンで実装するアプリケーション**
 
- 加速度センサを利用した機械の振動監視システムを構築します。今回はデバイスとしてWioLTE JP Verを利用します。加速度センサを振動を監視したい機械に設置し、振動を計測します。今回は監視対象の機械としてWioLTE JP Verのキットに含まれるブザーを利用します。ブザーの音を振動として加速度センサで計測します。
+**アプリケーションの概要**
 
-　WioLTE JP Verの
-
-## **ハンズオン**
-
-ハンズオンは以下の４つの手順で進めます。
-
-1.  ハードウェアのセットアップ
-2.  教師データの収集
-3.  AI学習
-4.  推論プログラムの実行 
+　加速度センサを利用した機械の振動監視システムを構築します。今回はデバイスとしてWioLTE JP Verを利用します。加速度センサを振動を監視したい機械に設置し、振動を計測します。今回は監視対象の機械の代わりにWioLTE JP Verのキットに含まれるブザーを利用します。ブザーの音を振動として加速度センサで計測します。計測された加速度はWioLTE上のEdge AIで処理され、ブザーの動作状態のみがSORACOM Harvestへ送られ可視化されます。
+<br>
+><img src="contents/application.png" width="720">
 <br><br>
 
+**ハンズオンの内容につて**
+
+ハンズオンでは[TensorFlow Lite for microcontrollers](https://www.tensorflow.org/lite/microcontrollers?hl=ja)を利用したWio LTEでのEdge AIの実現方法とSORACOM Harvest Dataでの可視化方法について学習します。以下のオーバービューに示す通り6つのステップで構成されています。
+
+><img src="contents/overview.png" width="720">
+<br><br>
+
+1. 学習データの収集
+2. AIモデルの学習
+3. AIモデルの変換
+4. WioLTEへのプログラムの実装と書き込み
+5. 推論の実行
+6. SORACOM Harvest Dataでの可視化
+<br><br>
+
+## **事前準備**
+
+
+**WioLTE開発環境の準備**
+
+* Windows
+
+
+* macOS
+
+
+**SORACOM SIMのアクティベーション**
+
+
+## **ハンズオン**
 
 ### **1. ハードウェアのセットアップ** 
 <br>
