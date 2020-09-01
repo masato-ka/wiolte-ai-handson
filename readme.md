@@ -47,9 +47,11 @@
 
 * Windows
 
+//TODO 
 
 * macOS
 
+//TODO
 
 **SORACOM SIMのアクティベーション**
 
@@ -233,5 +235,5 @@ MIT Lisence
 
 ## Author
 
-masato-ka jp8uzv@gmail.com
+masato-ka jp6uzv@gmail.com
 
