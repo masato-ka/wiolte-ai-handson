@@ -45,15 +45,18 @@
 
 **WioLTE開発環境の準備**
 
-* Windows
+* Windowsの環境構築
 
-//TODO 
+https://soracom.github.io/jp-training/WioLTE/0/prepare-win
 
-* macOS
+* macOSの環境構築
 
-//TODO
+https://soracom.github.io/jp-training/WioLTE/0/prepare-win
 
-**SORACOM SIMのアクティベーション**
+
+* WioLTEの利用方法及動作確認
+
+https://soracom.github.io/jp-training/WioLTE/1/1-setup
 
 
 ## **ハンズオン**
