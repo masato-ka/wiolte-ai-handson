@@ -194,7 +194,7 @@ Google Colaboratoryのipynotebook上に記載の手順を参考に作業を進�
 
 
 
-### <font color=b2ffff**4. 推論プログラムの書き込み**</font>
+### <font color=b2ffff>**4. 推論プログラムの書き込み**</font>
 <br><br>
 
 
@@ -238,7 +238,7 @@ Arduino IDEで```inference-wiolte/inference-wiolte.ino```を開き、コンパ�
 書き込み完了後、WioLTEを再起動してください。WioLTEに接続したスイッチを押すとブザーがなり、LEDが光ります。もう一度スイッチを押してブザーを止めるとLEDがとまります。ゆっくりと加速度センサーの向きを変えながら動作させて、結果が変わらないことを確認しましょう。
 <br><br>
 
-### <font color=b2ffff**6. SORACOM Harvestの設定と確認**</font>
+### <font color=b2ffff>**6. SORACOM Harvestの設定と確認**</font>
 
 WioLTEで計測した加速度のイベント情報をSORACOM Harvestへ送り、可視化します。すでに、WioLTEからは以下のJSONフォーマットが定期的にSORACOM Unified Endpointへ送らられています。今回はUnified Endpointの設定とHarvest Datan設定を行い、SORACOM プラットフォームで可視化できるようにします。
 
