@@ -40,7 +40,7 @@
 6. SORACOM Harvest Dataでの可視化
 <br><br>
 
-## **事前準備**
+## **●事前準備**
 
 
 **WioLTE開発環境の準備**
@@ -74,9 +74,9 @@ python3 -m pip install pyserial
 
 
 
-## **ハンズオン**
+## **●ハンズオン**
 
-### **1. ハードウェアのセットアップ** 
+### <font color=b2ffff>**1. ハードウェアのセットアップ**</font> 
 <br>
 
 **手順1. WioLTE必要な部品を取り付ける**
@@ -106,7 +106,7 @@ python3 -m pip install pyserial
 <br><br>
 
 
-### **2. 教師データの収集**
+### <font color=b2ffff**2. 教師データの収集**</font>
 
 AIを学習させるためのデータを収集します。実際に、ブザーをON/OFFし、加速度センサの値を収集します。
 <br><br>
@@ -160,7 +160,7 @@ python tools/loggercsv.py -p /dev/cu.usbserialxxxxxx -f sample/own_train_data.cs
 <br><br>
 
 
-### **3. AIの学習**
+### <font color=b2ffff>**3. AIの学習**</font>
 
 収集したデータを元にAIの学習を行います。AIの学習はTensorFlowが搭載されたマシンで実行します。このハンズオンではGoogle Colaboratoryを利用して、AIの学習を実行します。
 <br><br>
@@ -194,7 +194,7 @@ Google Colaboratoryのipynotebook上に記載の手順を参考に作業を進�
 
 
 
-### **4. 推論プログラムの書き込み**
+### <font color=b2ffff**4. 推論プログラムの書き込み**</font>
 <br><br>
 
 
@@ -233,12 +233,12 @@ C:￥Users￥ユーザー名￥Documents￥Arduino
 Arduino IDEで```inference-wiolte/inference-wiolte.ino```を開き、コンパイル後、WioLTEへ書き込みを行います。書き込み完了後、WioLTEを再起動すると、プログラムが実行されます。
 <br><br>
 
-### **5. 推論プログラムの実行**
+### <font color=b2ffff**5. 推論プログラムの実行**</font>
 
 書き込み完了後、WioLTEを再起動してください。WioLTEに接続したスイッチを押すとブザーがなり、LEDが光ります。もう一度スイッチを押してブザーを止めるとLEDがとまります。ゆっくりと加速度センサーの向きを変えながら動作させて、結果が変わらないことを確認しましょう。
 <br><br>
 
-### **6. SORACOM Harvestの設定と確認**
+### <font color=b2ffff**6. SORACOM Harvestの設定と確認**</font>
 
 WioLTEで計測した加速度のイベント情報をSORACOM Harvestへ送り、可視化します。すでに、WioLTEからは以下のJSONフォーマットが定期的にSORACOM Unified Endpointへ送らられています。今回はUnified Endpointの設定とHarvest Datan設定を行い、SORACOM プラットフォームで可視化できるようにします。
 
@@ -276,7 +276,7 @@ buzzer:0:uint:1:0
 <br><br>
 
 
-** 手順3. Harvestの設定
+**手順3. Harvestの設定**
 
 SIMグループの設定からHarvestの設定を開き、① Harvestの設定を「ON」にします。その後、②「保存」を押下します。
 
@@ -284,14 +284,14 @@ SIMグループの設定からHarvestの設定を開き、① Harvestの設定�
 <br><br>
 
 
-** 手順4. SIMへのグループ設定
+**手順4. SIMへのグループ設定**
 
 SIM一覧からWioLTEに利用しているSIMに①「チェック」を入れて選択します。画面上の②「操作」からプルダウンメニューを表示して、③「所属グループ変更」を押下します。「新しい所属グループ」ダイアログで④作成したSIMグループを選択して、⑤「グループ変更」を押下します。
 
 > <img src="contents/group.png" width="720">
 <br><br>
 
-** 手順5. Harvestの確認
+**手順5. Harvestの確認**
 
 WioLTEの電源を入れ、実際にSORACOM Harvestへデータが送信されているか確認します。
 
