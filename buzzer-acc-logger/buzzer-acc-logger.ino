@@ -15,11 +15,15 @@ volatile int t3;
 WioLTE Wio;
 ADXL345 Accel;
 
-bool is_buzzer_on = true;
+int is_buzzer_on = 0;
 
-void buzzer(HardwareTimer *HT){
-  digitalWrite(BUZZER_PIN, is_buzzer_on);
-  is_buzzer_on = !is_buzzer_on;
+
+void button(){
+    if(is_buzzer_on == 1){
+      is_buzzer_on = 0;
+    }else{
+      is_buzzer_on = 1;
+    }
 }
 
 void setup()
@@ -37,12 +41,9 @@ void setup()
   delay(500);
   Accel.powerOn();
 
-  Timer3.setOverflow(1000 * 1000, MICROSEC_FORMAT); // = per 1 sec
-  Timer3.attachInterrupt(&buzzer);
-  //Timer3.resume();
   pinMode(BUZZER_PIN, OUTPUT);
   pinMode(BUTTON_PIN, INPUT);
-  
+  attachInterrupt(BUTTON_PIN, button, RISING);
   delay(500);
   
   SerialUSB.println("### Setup completed.");
@@ -50,17 +51,11 @@ void setup()
 
 void loop()
 {
-  int buttonState = digitalRead(BUTTON_PIN);
-  if(buttonState){
-    digitalWrite(BUZZER_PIN, HIGH);
-  }else{
-    digitalWrite(BUZZER_PIN, LOW);
-  }
   int x;
   int y;
   int z;
   Accel.readXYZ(&x, &y, &z);
-  SerialUSB.print(buttonState);
+  SerialUSB.print(is_buzzer_on);
   SerialUSB.print(' ');
   SerialUSB.print(x);
   SerialUSB.print(' ');
@@ -68,6 +63,7 @@ void loop()
   SerialUSB.print(' ');
   SerialUSB.println(z);
   
-  
+  digitalWrite(BUZZER_PIN, is_buzzer_on);
+
   delay(INTERVAL);
 }
