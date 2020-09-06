@@ -106,7 +106,7 @@ python3 -m pip install pyserial
 <br><br>
 
 
-### <font color=b2ffff**2. 教師データの収集**</font>
+### <font color=b2ffff>**2. 教師データの収集**</font>
 
 AIを学習させるためのデータを収集します。実際に、ブザーをON/OFFし、加速度センサの値を収集します。
 <br><br>
@@ -233,7 +233,7 @@ C:￥Users￥ユーザー名￥Documents￥Arduino
 Arduino IDEで```inference-wiolte/inference-wiolte.ino```を開き、コンパイル後、WioLTEへ書き込みを行います。書き込み完了後、WioLTEを再起動すると、プログラムが実行されます。
 <br><br>
 
-### <font color=b2ffff**5. 推論プログラムの実行**</font>
+### <font color=b2ffff>**5. 推論プログラムの実行**</font>
 
 書き込み完了後、WioLTEを再起動してください。WioLTEに接続したスイッチを押すとブザーがなり、LEDが光ります。もう一度スイッチを押してブザーを止めるとLEDがとまります。ゆっくりと加速度センサーの向きを変えながら動作させて、結果が変わらないことを確認しましょう。
 <br><br>
