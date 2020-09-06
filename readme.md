@@ -54,9 +54,24 @@ https://soracom.github.io/jp-training/WioLTE/0/prepare-win
 https://soracom.github.io/jp-training/WioLTE/0/prepare-win
 
 
-* WioLTEの利用方法及動作確認
+**WioLTEの利用方法及動作確認**
 
 https://soracom.github.io/jp-training/WioLTE/1/1-setup
+
+
+**pyserialのインストール**
+
+WioLTEからシリアルでデータを受信してファイルに保存する必要があります。以下の環境を構築してください。
+
+* Python3のインストール
+* pyserialのインストール
+
+Python3インストール後、ターミナルまたはコマンドプロンプトから以下のコマンドを実行します。
+
+```shell
+python3 -m pip install pyserial
+```
+
 
 
 ## **ハンズオン**
@@ -126,17 +141,22 @@ python tools/loggercsv.py -p <シリアルポート名> -f <csvファイル名>
 python tools/loggercsv.py -p /dev/cu.usbserialxxxxxx -f sample/own_train_data.csv
 
 ```
+***<span style="color: red; ">実行にはpyserialモジュールが必要になるので、あらかじめインストールを行ってください。</span>***
+
 <br><br>
 
 
 **手順3. データの収集**
 
-ロギング開始後、３分ほどボタンを押さずに、加速度センサを様々な覚悟に変えながらデータを取得します。
+ロギング開始後、loggercsvの出力に収集したデータ数が表示されます。
 
-３分経過後、ボタンを押してブザーを鳴らしながらデータを取得します。先ほどと同様に、加速度センサの向きを変えながらもういちど3分程度データを取得します。
+* ブザーなしのデータを集める。
+　ブザーがなっていない状態で加速度センサの向きを複数の方向にゆっくりと変えながらデータを取得します。取得するデータ数が25000程度になるまで実行します。完了したら、そのままブザーありのデータを集めます。
 
+* ブザーありのデータを集める。
+　WioLTEに接続したボタンを押すとブザーがなり始めます。ブザーがなったまま、加速度センサの向きをゆっくりと変えてデータを取得します。ブザーなしのデータから連続して50000程度のデータ(ブザーありのデータが25000程度)を取得してください。
 
-十分な量のデータを取得した後に、```loggercsv.py```を停止させ、データの収集を完了します。
+十分な量のデータを取得した後に、```loggercsv.py```をCtr+cで停止させてデータの収集を完了します。
 <br><br>
 
 
@@ -152,6 +172,8 @@ python tools/loggercsv.py -p /dev/cu.usbserialxxxxxx -f sample/own_train_data.cs
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/masato-ka/wiolte-ai-handson/blob/master/tools/ai_wiolte_train_pynb.ipynb)
 <br><br>
 
+Google Colaboratoryは「ランタイム」->「ランタイムの変更」からGPUランタイムを選択してください。
+
 **手順2. 学習データのアップロード**
 
 「2. 教師データの収集」で収集した、加速度データのCSVファイルをGoogle Colaboratoryへアップロードします。Google Colaboratory左側の①フォルダマークを選択して、上部に表示される②アップロードボタンを押下します。
@@ -163,13 +185,11 @@ python tools/loggercsv.py -p /dev/cu.usbserialxxxxxx -f sample/own_train_data.cs
 <br><br>
 
 
-
-
 **手順3. 学習の実行**
 
 Google Colaboratoryのipynotebook上に記載の手順を参考に作業を進めます。
 
-全ての作業を実行後に```wio_model.cpp```ファイルと```min_val```, ```max_val```の値を取得します。「4. 推論プログラムの書き込み」で利用します。
+全ての作業を実行後に```wio_model.cpp```ファイルと```mean```, ```sigma```の値を取得します。「4. 推論プログラムの書き込み」で利用します。
 <br><br>
 
 
@@ -188,7 +208,7 @@ Google Colaboratoryのipynotebook上に記載の手順を参考に作業を進�
 [tensorflow_lite_tf_v2.2.1.zip](https://drive.google.com/file/d/1QTCwBLLvkkDEogMt-e8XBp0kNvgJ9ONy/view?usp=sharing)
 
 
-ダウンロードしたZIPファイルを展開したフォルダをArduino IDEのライブラリフォルダへコピーします。
+ダウンロードしたZIPファイルを展開したフォルダをArduino IDEのライブラリフォルダへコピーした後、Arduino IDEを再起動します。
 
 * Windowsの場合
 
@@ -208,7 +228,6 @@ C:￥Users￥ユーザー名￥Documents￥Arduino
 ```inference-wiolte/wio_model.cpp```ファイルを「3. AIの学習」でGoogle Colaboraotryでダウンロードしたファイルで上書きします。また、```inference-wiolte/wio_model.h```に記載されているmin_val, max_valも同様に上書きします。
 <br><br>
 
-
 **手順3. プログラムの書き込み**
 
 Arduino IDEで```inference-wiolte/inference-wiolte.ino```を開き、コンパイル後、WioLTEへ書き込みを行います。書き込み完了後、WioLTEを再起動すると、プログラムが実行されます。
@@ -216,16 +235,16 @@ Arduino IDEで```inference-wiolte/inference-wiolte.ino```を開き、コンパ�
 
 ### **5. 推論プログラムの実行**
 
-
-//動画と推論プログラムの動作の解説。
-
-
-
+書き込み完了後、WioLTEを再起動してください。WioLTEに接続したスイッチを押すとブザーがなり、LEDが光ります。もう一度スイッチを押してブザーを止めるとLEDがとまります。ゆっくりと加速度センサーの向きを変えながら動作させて、結果が変わらないことを確認しましょう。
+<br><br>
 
 ### **6. SORACOM Harvestの設定と確認**
 
+WioLTEで計測した加速度のイベント情報をSORACOM Harvestへ送り、可視化します。すでに、WioLTEからは以下のJSONフォーマットが定期的にSORACOM Unified Endpointへ送らられています。今回はUnified Endpointの設定とHarvest Datan設定を行い、SORACOM プラットフォームで可視化できるようにします。
 
+**手順1. SIMグループの作成**
 
+　ハンズオン用にSIMグループの作成を行います。SORACOM ユーザーコンソールにログインして
 
 
 ## Contribution
