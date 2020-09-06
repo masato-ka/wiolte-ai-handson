@@ -244,8 +244,65 @@ WioLTEで計測した加速度のイベント情報をSORACOM Harvestへ送り�
 
 **手順1. SIMグループの作成**
 
-　ハンズオン用にSIMグループの作成を行います。SORACOM ユーザーコンソールにログインして
+　ハンズオン用にSIMグループの作成を行います。SORACOMのユーザーコンソールにログイン後、右上メニューから「SIMグループ」を選択してSIMグループ画面を開きます。
+> <img src="contents/select-group.png" width="720">
+<br><br>
 
+SIMグループ画面で①「追加」を押下し、グループ作成画面を開きます。②「グループ名」に任意のグループ名を入力して③「グループ作成」を押下します。
+> <img src="contents/create-group.png" width="720">
+グループ作成が完了するとグループの設定画面が開くのでそのまま手順２を行います。
+<br><br>
+
+
+**手順2. バイナリーパーサーの設定**
+
+　WioLTEからはSORACOM Unifiedendpointに対して。1バイトのデータが送られています。ブザーがなっている場合は最下位ビットが1となり、ブザーがなっていない場合は0が設定されます。（ブザーON: 0x01, ブザーOFF: 0x02)
+SORACOMのバイナリーパーサーを使い、1バイトのデータからJSONデータへ変換を行います。
+
+> <img src="contents/communication.png" width="720">
+<br><br>
+
+手順１で作成したSIMグループの設定から、「SORACOM Air for Cellular設定」のバイナリーパーサーを①「ON」にします。②「フォーマット」に以下の値を入力し、③「保存」を押下します。
+
+以下の設定は1byteのLSBを符号なし整数として読み取り、buzzerという名前のデータとしてJSON形式に整形する設定になります。
+
+* 参考：[バイナリーパーサーリファレンス](https://dev.soracom.io/jp/docs/binary_parser/)
+
+```
+buzzer:0:uint:1:0
+```
+
+> <img src="contents/binaryparser.png" width="720">
+<br><br>
+
+
+** 手順3. Harvestの設定
+
+SIMグループの設定からHarvestの設定を開き、① Harvestの設定を「ON」にします。その後、②「保存」を押下します。
+
+> <img src="contents/harvest.png" width="720">
+<br><br>
+
+
+** 手順4. SIMへのグループ設定
+
+SIM一覧からWioLTEに利用しているSIMに①「チェック」を入れて選択します。画面上の②「操作」からプルダウンメニューを表示して、③「所属グループ変更」を押下します。「新しい所属グループ」ダイアログで④作成したSIMグループを選択して、⑤「グループ変更」を押下します。
+
+> <img src="contents/group.png" width="720">
+<br><br>
+
+** 手順5. Harvestの確認
+
+WioLTEの電源を入れ、実際にSORACOM Harvestへデータが送信されているか確認します。
+
+SIM一覧からWioLTEに利用しているSIMに①「チェック」を入れて選択します。画面上の②「操作」からプルダウンメニューを表示して、③「データを確認」を押下します。ブラウザ上でSORACOM Harvestの画面が開きます。
+
+> <img src="contents/open-harvest.png" width="720">
+<br><br>
+
+WioLTEからは10秒に1回現在の状態を送信します。また、ブザーのON/OFFが切り替わった際にもデータを送信します。
+
+WIoLTEに接続したスイッチを押下してブザーをON/OFFしながら、ブザーの動作状況がHarvest上で可視化されることを確認します。
 
 ## Contribution
 
